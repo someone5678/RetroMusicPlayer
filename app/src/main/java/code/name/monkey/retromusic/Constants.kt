@@ -18,22 +18,6 @@ import android.provider.BaseColumns
 import android.provider.MediaStore
 
 object Constants {
-    const val PRO_VERSION_PRODUCT_ID = "pro_version"
-    const val RATE_ON_GOOGLE_PLAY =
-        "https://play.google.com/store/apps/details?id=code.name.monkey.retromusic"
-    const val TRANSLATE = "https://crowdin.com/project/retromusicplayer"
-    const val WEBSITE = "https://retromusic.app"
-    const val GITHUB_PROJECT = "https://github.com/RetroMusicPlayer/RetroMusicPlayer"
-    const val TELEGRAM_CHANGE_LOG = "https://t.me/retromusiclog"
-    const val USER_PROFILE = "profile.jpg"
-    const val USER_BANNER = "banner.jpg"
-    const val APP_INSTAGRAM_LINK = "https://www.instagram.com/retromusicapp/"
-    const val APP_TELEGRAM_LINK = "https://t.me/retromusicapp/"
-    const val APP_TWITTER_LINK = "https://twitter.com/retromusicapp"
-    const val FAQ_LINK = "https://github.com/RetroMusicPlayer/RetroMusicPlayer/blob/master/FAQ.md"
-    const val PINTEREST = "https://in.pinterest.com/retromusicapp/"
-    const val AUDIO_SCROBBLER_URL = "https://ws.audioscrobbler.com/2.0/"
-
     const val IS_MUSIC =
         MediaStore.Audio.AudioColumns.IS_MUSIC + "=1" + " AND " + MediaStore.Audio.AudioColumns.TITLE + " != ''"
 
@@ -71,7 +55,6 @@ const val EXTRA_SONG_INFO = "extra_song_info"
 const val DESATURATED_COLOR = "desaturated_color"
 const val BLACK_THEME = "black_theme"
 const val KEEP_SCREEN_ON = "keep_screen_on"
-const val TOGGLE_HOME_BANNER = "toggle_home_banner"
 const val NOW_PLAYING_SCREEN_ID = "now_playing_screen_id"
 const val CAROUSEL_EFFECT = "carousel_effect"
 const val COLORED_NOTIFICATION = "colored_notification"
@@ -85,7 +68,6 @@ const val GENERAL_THEME = "general_theme"
 const val ACCENT_COLOR = "accent_color"
 const val SHOULD_COLOR_APP_SHORTCUTS = "should_color_app_shortcuts"
 const val CIRCULAR_ALBUM_ART = "circular_album_art"
-const val USER_NAME = "user_name"
 const val TOGGLE_FULL_SCREEN = "toggle_full_screen"
 const val TOGGLE_VOLUME = "toggle_volume"
 const val ADAPTIVE_COLOR_APP = "adaptive_color_app"

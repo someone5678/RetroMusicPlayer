@@ -113,15 +113,6 @@ object PreferenceUtil {
             putBoolean(LOCALE_AUTO_STORE_ENABLED, value)
         }
 
-    var Fragment.userName
-        get() = sharedPreferences.getString(
-            USER_NAME,
-            getString(R.string.user_name)
-        )
-        set(value) = sharedPreferences.edit {
-            putString(USER_NAME, value)
-        }
-
     var safSdCardUri
         get() = sharedPreferences.getStringOrDefault(SAF_SDCARD_URI, "")
         set(value) = sharedPreferences.edit {
@@ -245,10 +236,6 @@ object PreferenceUtil {
             TOGGLE_ADD_CONTROLS, false
         )
 
-    val isHomeBanner
-        get() = sharedPreferences.getBoolean(
-            TOGGLE_HOME_BANNER, false
-        )
     var isClassicNotification
         get() = sharedPreferences.getBoolean(CLASSIC_NOTIFICATION, false)
         set(value) = sharedPreferences.edit { putBoolean(CLASSIC_NOTIFICATION, value) }

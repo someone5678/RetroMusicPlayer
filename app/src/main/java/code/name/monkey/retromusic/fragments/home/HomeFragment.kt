@@ -42,14 +42,11 @@ import code.name.monkey.retromusic.extensions.setUpMediaRouteButton
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.RetroGlideExtension
-import code.name.monkey.retromusic.glide.RetroGlideExtension.profileBannerOptions
 import code.name.monkey.retromusic.glide.RetroGlideExtension.songCoverOptions
-import code.name.monkey.retromusic.glide.RetroGlideExtension.userProfileOptions
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.IScrollHelper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.PreferenceUtil.userName
 import com.bumptech.glide.Glide
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
@@ -67,7 +64,6 @@ class HomeFragment :
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.supportActionBar?.title = null
         setupListeners()
-        binding.titleWelcome.text = String.format("%s", userName)
 
         enterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
         reenterTransition = MaterialFadeThrough().addTarget(binding.contentContainer)
@@ -86,7 +82,6 @@ class HomeFragment :
             homeAdapter.swapData(it)
         }
 
-        loadProfile()
         setupTitle()
         colorButtons()
         postponeEnterTransition()
@@ -108,15 +103,6 @@ class HomeFragment :
     }
 
     private fun setupListeners() {
-        binding.bannerImage?.setOnClickListener {
-            findNavController().navigate(
-                R.id.user_info_fragment, null, null, FragmentNavigatorExtras(
-                    binding.userImage to "user_image"
-                )
-            )
-            reenterTransition = null
-        }
-
         binding.lastAdded.setOnClickListener {
             findNavController().navigate(
                 R.id.detailListFragment,
@@ -145,13 +131,6 @@ class HomeFragment :
             setSharedAxisYTransitions()
         }
 
-        binding.userImage.setOnClickListener {
-            findNavController().navigate(
-                R.id.user_info_fragment, null, null, FragmentNavigatorExtras(
-                    binding.userImage to "user_image"
-                )
-            )
-        }
         // Reload suggestions
         binding.suggestions.refreshButton.setOnClickListener {
             libraryViewModel.forceReload(
@@ -167,19 +146,6 @@ class HomeFragment :
         val hexColor = String.format("#%06X", 0xFFFFFF and accentColor())
         val appName = "Retro <font color=$hexColor>Music</font>".parseAsHtml()
         binding.appBarLayout.title = appName
-    }
-
-    private fun loadProfile() {
-        binding.bannerImage?.let {
-            Glide.with(requireContext())
-                .load(RetroGlideExtension.getBannerModel())
-                .profileBannerOptions(RetroGlideExtension.getBannerModel())
-                .into(it)
-        }
-        Glide.with(requireActivity())
-            .load(RetroGlideExtension.getUserModel())
-            .userProfileOptions(RetroGlideExtension.getUserModel(), requireContext())
-            .into(binding.userImage)
     }
 
     fun colorButtons() {

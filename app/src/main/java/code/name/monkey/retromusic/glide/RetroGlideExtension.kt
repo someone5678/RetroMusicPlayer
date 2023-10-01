@@ -6,8 +6,6 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.App.Companion.getContext
-import code.name.monkey.retromusic.Constants.USER_BANNER
-import code.name.monkey.retromusic.Constants.USER_PROFILE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.accentColor
 import code.name.monkey.retromusic.glide.artistimage.ArtistImage
@@ -43,7 +41,6 @@ object RetroGlideExtension {
         R.drawable.default_artist_art
     private const val DEFAULT_SONG_IMAGE: Int = R.drawable.default_audio_art
     private const val DEFAULT_ALBUM_IMAGE = R.drawable.default_album_art
-    private const val DEFAULT_ERROR_IMAGE_BANNER = R.drawable.material_design_default
 
     private val DEFAULT_DISK_CACHE_STRATEGY_ARTIST = DiskCacheStrategy.RESOURCE
     private val DEFAULT_DISK_CACHE_STRATEGY = DiskCacheStrategy.NONE
@@ -130,24 +127,6 @@ object RetroGlideExtension {
             .signature(createSignature(song))
     }
 
-    fun <T> RequestBuilder<T>.userProfileOptions(
-        file: File,
-        context: Context
-    ): RequestBuilder<T> {
-        return diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-            .error(getErrorUserProfile(context))
-            .signature(createSignature(file))
-    }
-
-    fun <T> RequestBuilder<T>.profileBannerOptions(
-        file: File
-    ): RequestBuilder<T> {
-        return diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-            .placeholder(DEFAULT_ERROR_IMAGE_BANNER)
-            .error(DEFAULT_ERROR_IMAGE_BANNER)
-            .signature(createSignature(file))
-    }
-
     fun <T> RequestBuilder<T>.playlistOptions(): RequestBuilder<T> {
         return diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
             .placeholder(getDrawable(DEFAULT_ALBUM_IMAGE))
@@ -165,24 +144,6 @@ object RetroGlideExtension {
     private fun createSignature(artist: Artist): Key {
         return ArtistSignatureUtil.getInstance(getContext())
             .getArtistSignature(artist.name)
-    }
-
-    fun getUserModel(): File {
-        val dir = getContext().filesDir
-        return File(dir, USER_PROFILE)
-    }
-
-    fun getBannerModel(): File {
-        val dir = getContext().filesDir
-        return File(dir, USER_BANNER)
-    }
-
-    private fun getErrorUserProfile(context: Context): Drawable {
-        return TintHelper.createTintedDrawable(
-            context,
-            R.drawable.ic_account,
-            context.accentColor()
-        )
     }
 
     fun <TranscodeType> getDefaultTransition(): GenericTransitionOptions<TranscodeType> {

@@ -22,7 +22,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.ShareInstagramStory
 import code.name.monkey.retromusic.extensions.colorButtons
 import code.name.monkey.retromusic.extensions.materialDialog
 import code.name.monkey.retromusic.model.Song
@@ -42,7 +41,6 @@ class SongShareDialog : DialogFragment() {
                 arrayOf(
                     getString(R.string.the_audio_file),
                     "\u201C" + listening + "\u201D",
-                    getString(R.string.social_stories)
                 )
             ) { _, which ->
                 withAction(which, song, listening)
@@ -75,19 +73,6 @@ class SongShareDialog : DialogFragment() {
                         null
                     )
                 )
-            }
-            2 -> {
-                if (song != null) {
-                    startActivity(
-                        Intent(
-                            requireContext(),
-                            ShareInstagramStory::class.java
-                        ).putExtra(
-                            ShareInstagramStory.EXTRA_SONG,
-                            song
-                        )
-                    )
-                }
             }
         }
     }

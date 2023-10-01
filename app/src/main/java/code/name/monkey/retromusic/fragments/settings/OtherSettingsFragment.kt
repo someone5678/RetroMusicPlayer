@@ -23,7 +23,6 @@ import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
 import code.name.monkey.retromusic.LANGUAGE_NAME
 import code.name.monkey.retromusic.LAST_ADDED_CUTOFF
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.installLanguageAndRecreate
 import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.ReloadType.HomeSections
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -63,15 +62,6 @@ class OtherSettingsFragment : AbsSettingsFragment() {
             setSummary(prefs, newValue)
             if (newValue as? String == "auto") {
                 AppCompatDelegate.setApplicationLocales(LocaleListCompat.getEmptyLocaleList())
-            } else {
-                // Install the languages from Play Store first and then set the application locale
-                requireActivity().installLanguageAndRecreate(newValue.toString()) {
-                    AppCompatDelegate.setApplicationLocales(
-                        LocaleListCompat.forLanguageTags(
-                            newValue as? String
-                        )
-                    )
-                }
             }
             true
         }
